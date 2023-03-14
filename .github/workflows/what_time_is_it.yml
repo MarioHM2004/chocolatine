@@ -1,7 +1,8 @@
 on: [push]
 
+name: what_time_is_it
+
 jobs:
-  name: what time is it
-  runs-on: fedora-lastest
+  runs-on: ubuntu-latest
   steps:
-    run: date
+   - run: date
