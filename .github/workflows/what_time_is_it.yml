@@ -1,0 +1,7 @@
+on: [push]
+
+jobs:
+  name: what time is it
+  runs-on: fedora-lastest
+  steps:
+    run: date
