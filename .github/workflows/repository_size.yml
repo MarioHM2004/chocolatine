@@ -1,0 +1,17 @@
+name: repository size
+
+on: [push]
+
+jobs:
+  repo_size:
+    runs-on: ubunt-latest
+    - name: Checkout
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3.3.0
+
+          - name: branch-name
+            uses: echo
+
+          - name: repo-size
+            uses: du -skh --exclude=".git"
