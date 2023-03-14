@@ -1,8 +1,9 @@
-on: [push]
-
 name: what_time_is_it
 
+on: [push]
+
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-   - run: date
+  get_date:
+    runs-on: ubuntu-latest
+    steps:
+      - run: date
