@@ -1,0 +1,44 @@
+name: chocolatine
+
+on:
+  push:
+    branches-ignore:
+      - ga-ignore-*
+  pull_request:
+    branches-ignore:
+      - ga-ignore-*
+env:
+  MIRROR_URL: https://github.com/EpitechPromo2027/B-DOP-200-BAR-2-1-chocolatine-mario-alessandro.herranz-machado.git
+  EXECUTABLES: equis
+jobs:
+  check_coding_style:
+    runs-on: ubuntu-latest
+    container:
+        image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - name: Copy files
+        uses: actions/checkout@v2
+      - name: run coding style
+        run: |
+          check.sh $(pwd) $(pwd)
+      - name: fail if errors
+        run: |
+          set -e
+          if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
+            echo "Coding style errors:"
+            cat coding-style-reports.log
+            exit 1
+          else
+            echo "The coding-style-reports.log file is empty or does not exist."
+          fi
+  run_tests:
+    runs-on: ubuntu-latest
+    container:
+        image: epitechcontent/epitest-docker:latest
+    steps:
+      - name: Copy files
+        uses: actions/checkout@v2
+      - name: run tests
+        run: |
+          make tests_run
+          ./tests_run
